@@ -9,6 +9,7 @@ class openssh (
   $port = hiera('openssh::port', 2222),
 ) {
 
+  notice( $port )
   if $config {
     validate_hash( $config )
   }
