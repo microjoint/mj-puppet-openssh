@@ -6,10 +6,10 @@ class openssh (
   $service_ensure = hiera('openssh::service_ensure', 'running'),
   $service_enable = hiera('openssh::service_enable', true),
   $service_name   = hiera('openssh::service_name', 'ssh'),
-  $port = hiera('openssh::port', 2222),
+  $port = hiera('openssh::port', 22),
 ) {
 
-  notice("${port}" )
+  notice( $port )
   if $config {
     validate_hash( $config )
   }
