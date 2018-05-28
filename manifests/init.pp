@@ -1,14 +1,15 @@
 #
 class openssh (
-  $config = hiera('openssh::config', undef),
-  $package_name = hiera('openssh::package_name', 'openssh'),
-  $package_ensure = hiera('openssh::package_ensure', 'latest'),
-  $service_ensure = hiera('openssh::service_ensure', 'running'),
-  $service_enable = hiera('openssh::service_enable', true),
-  $service_name   = hiera('openssh::service_name', 'ssh'),
-  $port = hiera('openssh::port', 22),
+  $config = lookup('openssh::config', {merge => 'hash', default_value => undef}),
+  $package_name = lookup('openssh::package_name', String, 'unique', 'openssh' ),
+  $package_ensure = lookup('openssh::package_ensure', String, 'unique', 'latest'),
+  $service_ensure = lookup('openssh::service_ensure', String, 'unique', 'running'),
+  $service_enable = lookup('openssh::service_enable', Boolean, 'unique', true),
+  $service_name   = lookup('openssh::service_name', String, 'unique', 'ssh'),
+  $port = lookup('openssh::port',Integer, 'unique',  22),
 ) {
 
+  notice( "ssh port ${port}" )
   if $config {
     validate_hash( $config )
   }
