@@ -1,11 +1,11 @@
 #
 class openssh::config {
-  if ( $config ) {
+  if ( $openssh::config ) {
     create_resources( file, $config )
   }
 
   file{ '/etc/ssh/sshd_config':
     ensure  => file,
-    content => template('openssh/sshd_config.erb'),
+    content => epp('openssh/sshd_config.epp'),
   }
 }
