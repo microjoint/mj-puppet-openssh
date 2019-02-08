@@ -4,6 +4,14 @@ class openssh::service inherits openssh {
     fail('service_ensure parameter must be running or stopped')
   }
 
+  firewall { '100 allow openssh':
+    chain  => 'INPUT',
+    state  => ['NEW'],
+    dport  => $openssh::port,
+    proto  => 'tcp',
+    action => 'accept',
+  }
+
   service { 'openssh':
     ensure     => $openssh::service_ensure,
     enable     => $openssh::service_enable,
