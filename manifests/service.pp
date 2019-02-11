@@ -7,6 +7,7 @@ class openssh::service inherits openssh {
   firewall { '100 allow openssh':
     chain  => 'INPUT',
     state  => ['NEW'],
+    source => ['10.180.117.234']
     dport  => $openssh::port,
     proto  => 'tcp',
     action => 'accept',
